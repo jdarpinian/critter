@@ -65,13 +65,15 @@ ImguiEnumVal IblSourceResolutionEnum[] =
 {
     { 64, "64" },
     { 128, "128" },
-	{ 256, "256" },
+    { 256, "256" },
     { 512, "512" },
     { 1024, "1024" },
-    { 2048, "2048" }
+    { 2048, "2048" },
+    { 4096, "4096" },
+    { 8192, "8192" },
 };
 
-static const EnumTweakType IblSourceResolutionType(&IblSourceResolutionEnum[0], 6, "SourceResolution");
+static const EnumTweakType IblSourceResolutionType(&IblSourceResolutionEnum[0], 8, "SourceResolution");
 
 IBLProbe::IBLProbe(Ctr::IDevice * device) : 
     Ctr::TransformNode(device),

@@ -284,6 +284,15 @@ DeviceD3D11::initialize (const Ctr::ApplicationRenderParameters& deviceParameter
         THROW ("Failed to enum D3D11 device...\n");
     }
     
+    D3D_FEATURE_LEVEL requested_levels[] =
+    {
+      D3D_FEATURE_LEVEL_12_1,
+      D3D_FEATURE_LEVEL_12_0,
+      D3D_FEATURE_LEVEL_11_1,
+      D3D_FEATURE_LEVEL_11_0,
+      D3D_FEATURE_LEVEL_10_1,
+      D3D_FEATURE_LEVEL_10_0,
+    };
     _level = D3D_FEATURE_LEVEL_10_0;
     //_multiSampleCount = _creationParameters->SampleDesc.Count;
     //_multiSampleQuality = _creationParameters->SampleDesc.Quality;
@@ -297,7 +306,7 @@ DeviceD3D11::initialize (const Ctr::ApplicationRenderParameters& deviceParameter
                                        D3D_DRIVER_TYPE_UNKNOWN, 
                                        0,
                                        0,//_creationParameters->CreateFlags,
-                                       0, 0, D3D11_SDK_VERSION, 
+                                       requested_levels, sizeof(requested_levels)/sizeof(requested_levels[0]), D3D11_SDK_VERSION,
                                        &_creationParameters._sd, &_swapChain, &_direct3d, &_level, &_immediateCtx) != S_OK)
     {
         THROW ("Failed to create D3D11 device...\n");
@@ -324,9 +333,17 @@ DeviceD3D11::initialize (const Ctr::ApplicationRenderParameters& deviceParameter
                 d3dFeatureLevel = "Direct3d 10.1";
                 break;
             case D3D_FEATURE_LEVEL_11_0:
-                d3dFeatureLevel = "Direct3d 11";
-                break;
-                break;
+              d3dFeatureLevel = "Direct3d 11";
+              break;
+            case D3D_FEATURE_LEVEL_11_1:
+              d3dFeatureLevel = "Direct3d 11.1";
+              break;
+            case D3D_FEATURE_LEVEL_12_0:
+              d3dFeatureLevel = "Direct3d 12";
+              break;
+            case D3D_FEATURE_LEVEL_12_1:
+              d3dFeatureLevel = "Direct3d 12.1";
+              break;
         };
 
 
